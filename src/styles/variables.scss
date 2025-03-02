@@ -1,0 +1,53 @@
+// color
+$white_color: #f8f8ff;
+$white_color_rgba: rgba(248, 248, 255, .2);
+$black_color: #040b12 ;
+$text_color: #1c1c1c;
+$main_color: #0132b5;
+
+// border
+$border_radius: 10px;
+$circle_border_radius: 50%;
+$border_width: 1px;
+$border_width_big: 2px;
+
+// font
+$first_font: 'Orbitron', sans-serif;
+$second_font: 'Nunito', sans-serif;
+$font_weight_bold: 600;
+$font_weight_regular: normal;
+
+// font size
+$small_small_font_size: 12px;
+$small_font_size: 14px;
+$font_size: 16px;
+$medium_font_size: 18px;
+$big_font_size: 24px;
+$title_font_size: 32px;
+
+// text
+$text_indent: 20px;
+$letter_spacing: normal;
+$line_height: normal;
+
+// animation
+$transition: 0.6s all;
+$transition_time: 0.6s;
+
+$text_animation: 1s;
+$text_animation_margin: 20px;
+$text_animation_negative_margin: -20px;
+
+// margin
+$small_margin: 10px;
+$margin: 20px;
+$big_margin: 40px;
+
+// opacity
+$less_opacity: 0.6;
+
+// zIndex
+$top_zindex: 100;
+
+// phone
+$phone_width: 1000px;
