@@ -147,13 +147,34 @@ h1 {
   @media only screen and (max-width: $phone_width) {
     font-size: $small_font_size;
   }
-  
+
   &:focus {
     border: $border_width solid $main_color;
   }
 
   &::placeholder {
     color: $white_color_rgba;
+  }
+}
+
+// ------------------------------+
+//
+//          Error Banner
+//
+// ------------------------------+
+
+.error_banner {
+  width: 100%;
+  margin-bottom: $margin;
+  background: $white_color_rgba;
+  padding: $small_margin;
+  border: none;
+  border-radius: $border_radius;
+  text-align: center;
+
+  p {
+    color: $error_color;
+    font-weight: $font_weight_bold;
   }
 }
 

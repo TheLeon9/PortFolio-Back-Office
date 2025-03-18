@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './index.module.scss';
 import { useTheme } from '@/context/ThemeContext.js';
+import Link from 'next/link';
 
 import Image from 'next/image';
 import Logo from 'p/img/logo/logo_fm_white.svg';
@@ -22,14 +23,26 @@ export default function Layout({ children }) {
       </div>
 
       {/* Main / Children */}
-
       {React.cloneElement(children)}
 
       {/* Footer */}
       {logged && (
         <div className={styles.section_bot}>
           {/* Navigation Bar */}
-          <p>Section uniquement visible quand l'utilisateur est connecté.</p>
+          <nav className={styles.navbar}>
+            <Link href="/user" className={styles.nav_link}>
+              👤 User
+            </Link>
+            <Link href="/projects" className={styles.nav_link}>
+              📁 Projects
+            </Link>
+            <Link href="/skills" className={styles.nav_link}>
+              🛠️ Skills
+            </Link>
+            <Link href="/dashboard" className={styles.nav_link}>
+              🏠 Dashboard
+            </Link>
+          </nav>
         </div>
       )}
     </div>

@@ -1,0 +1,46 @@
+@import '@/styles/variables.scss';
+
+// ------------------------------+
+//
+//          PILLAR
+//
+// ------------------------------+
+
+.pillar {
+  width: $image_height;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .section_image {
+    width: 100%;
+    height: $image_height;
+    display: flex;
+    justify-content: center;
+
+    .deco_image {
+      width: $image_height;
+      height: $image_height;
+    }
+  }
+
+  .deco_line {
+    width: $border_width_big;
+    height: calc(100% - $image_height);
+    background-color: $white_color;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: $margin;
+      height: $margin;
+      background-color: $white_color;
+      transform: translate(-50%, 0px) rotate(45deg);
+    }
+  }
+}

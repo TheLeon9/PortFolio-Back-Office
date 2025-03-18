@@ -48,5 +48,16 @@
     left: 0;
     z-index: $top_zindex;
     background-color: $white_color_rgba;
+
+    .nav_link {
+      color: $white_color;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: $main_color;
+      }
+    }
   }
 }

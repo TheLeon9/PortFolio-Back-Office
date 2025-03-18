@@ -1,10 +1,11 @@
 // color
 $white_color: #f8f8ff;
-$white_color_rgba: rgba(248, 248, 255, .2);
-$black_color: #040b12 ;
+$white_color_rgba: rgba(248, 248, 255, 0.2);
+$black_color: #040b12;
 $text_color: #1c1c1c;
 $main_color: #0132b5;
-$main_color_rgba: rgba(1, 50, 181, .2);
+$main_color_rgba: rgba(1, 50, 181, 0.2);
+$error_color: red;
 
 // border
 $border_radius: 10px;
@@ -52,3 +53,7 @@ $top_zindex: 100;
 
 // phone
 $phone_width: 1000px;
+
+// Image width and height
+$image_height: 40px;
+$double_image_height: 80px;
