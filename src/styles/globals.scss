@@ -13,7 +13,7 @@
 }
 
 body {
-  overflow-y: hidden;
+  overflow-x: hidden;
   letter-spacing: $letter_spacing;
   line-height: $line_height;
 }
@@ -159,6 +159,27 @@ h1 {
 
 // ------------------------------+
 //
+//          Succes Banner
+//
+// ------------------------------+
+
+.success_banner {
+  width: 100%;
+  margin-bottom: $margin;
+  background: $white_color_rgba;
+  padding: $small_margin;
+  border: none;
+  border-radius: $border_radius;
+  text-align: center;
+
+  p {
+    color: $succes_color;
+    font-weight: $font_weight_bold;
+  }
+}
+
+// ------------------------------+
+//
 //          Error Banner
 //
 // ------------------------------+
@@ -203,4 +224,28 @@ h1 {
 *::-moz-selection {
   background-color: $black_color;
   color: $main_color;
+}
+
+// ------------------------------+
+//
+//          SCROLLBAR
+//
+// ------------------------------+
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: $black_color;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color:  $white_color;
+  border: none;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color:  $main_color;
 }

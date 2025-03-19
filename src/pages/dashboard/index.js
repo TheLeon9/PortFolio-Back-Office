@@ -24,7 +24,7 @@ export default function Dashboard() {
         {/* Middle */}
         <div className={styles.container}>
           {/* Title */}
-          <Title title="DashBaord" />;
+          <Title title="DashBaord" />
         </div>
         {/* Pillar */}
         <Pillar />

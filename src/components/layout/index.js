@@ -22,12 +22,9 @@ export default function Layout({ children }) {
         />
       </div>
 
-      {/* Main / Children */}
-      {React.cloneElement(children)}
-
-      {/* Footer */}
+      {/* Nav Bar */}
       {logged && (
-        <div className={styles.section_bot}>
+        <div className={styles.section_nav}>
           {/* Navigation Bar */}
           <nav className={styles.navbar}>
             <Link href="/user" className={styles.nav_link}>
@@ -45,6 +42,9 @@ export default function Layout({ children }) {
           </nav>
         </div>
       )}
+
+      {/* Main / Children */}
+      {React.cloneElement(children)}
     </div>
   );
 }

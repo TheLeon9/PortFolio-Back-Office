@@ -13,13 +13,13 @@ export default function Login() {
   const router = useRouter();
   const { logged, isLogged } = useTheme();
 
-  const [email, setEmail] = useState('');
+  const [mail, setMail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   useEffect(() => {
     if (logged) {
-      router.replace('/dashboard');
+      router.replace('/user');
     }
   }, [logged]);
 
@@ -28,12 +28,12 @@ export default function Login() {
     setError('');
 
     // Identifiants valides en dur
-    const validEmail = 'f@f.f';
+    const validMail = 'f@f.f';
     const validPassword = '123';
 
-    if (email === validEmail && password === validPassword) {
+    if (mail === validMail && password === validPassword) {
       isLogged(true); // Mise à jour du contexte (Connexion réussie)
-      router.push('/dashboard');
+      router.push('/user');
     } else {
       setError('Invalid email or password.');
     }
@@ -69,17 +69,19 @@ export default function Login() {
           <form className={styles.login_form} onSubmit={handleSubmit}>
             <input
               className="input_style"
-              type="email"
-              placeholder="Email"
+              type="mail"
+              name="mail"
+              placeholder="Mail"
               // pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-              title="Please enter a valid email address (e.g., example@mail.com)"
-              onChange={(e) => setEmail(e.target.value)}
+              title="Please enter a valid Mail address (e.g., example@mail.com)"
+              onChange={(e) => setMail(e.target.value)}
               required
             />
             <input
               className="input_style"
               type="password"
-              placeholder="Mot de passe"
+              name='password'
+              placeholder="PassWord"
               // pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
               title="Password must be at least 8 characters long, include one uppercase letter, and one number."
               onChange={(e) => setPassword(e.target.value)}

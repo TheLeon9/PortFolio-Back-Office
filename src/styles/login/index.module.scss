@@ -2,17 +2,18 @@
 
 // ------------------------------+
 //
-//          LAYOUT
+//          LOGIN
 //
 // ------------------------------+
 
 .section_container {
   width: 100%;
-  height: calc(100vh - 200px);
+  height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  margin-top: $big_margin;
 
   .login {
     width: 600px;
