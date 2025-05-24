@@ -1,4 +1,4 @@
-@import '@/styles/variables.scss';
+@use '@/styles/variables';
 
 // ------------------------------+
 //
@@ -8,7 +8,7 @@
 
 .section_title {
   width: 100%;
-  height: $image_height;
+  height: variables.$image_height;
   display: flex;
   justify-content: center;
   align-items: center;

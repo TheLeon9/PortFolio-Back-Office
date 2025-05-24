@@ -1,4 +1,4 @@
-@import '@/styles/variables.scss';
+@use '@/styles/variables';
 
 // ------------------------------+
 //
@@ -13,30 +13,30 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: $big_margin;
+  margin-top: variables.$big_margin;
 
   .projects {
     width: 800px;
     height: auto;
     display: flex;
 
-    @media only screen and (max-width: $phone_width) {
+    @media only screen and (max-width: variables.$phone_width) {
       width: 90%;
       height: 90%;
     }
 
     .container {
-      width: calc(100% - $double_image_height);
+      width: calc(100% - variables.$double_image_height);
       height: auto;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      padding-bottom: $margin;
+      padding-bottom: variables.$margin;
 
       .projects_form {
         width: 90%;
-        margin-top: $big_margin;
+        margin-top: variables.$big_margin;
         display: flex;
         flex-direction: column;
 
@@ -49,13 +49,13 @@
         button,
         input {
           width: 100%;
-          margin-bottom: $margin;
+          margin-bottom: variables.$margin;
         }
       }
 
       .project_list {
         width: 90%;
-        margin-top: $big_margin;
+        margin-top: variables.$big_margin;
         display: flex;
         flex-direction: column;
 
@@ -65,20 +65,20 @@
           justify-content: space-between;
           align-items: center;
           list-style: none;
-          margin-bottom: $small_margin;
+          margin-bottom: variables.$small_margin;
 
-          background: $main_color_rgba;
-          padding: $small_margin;
-          border: $border_width solid $white_color_rgba;
-          border-radius: $border_radius;
+          background: variables.$main_color_rgba;
+          padding: variables.$small_margin;
+          border: variables.$border_width solid variables.$white_color_rgba;
+          border-radius: variables.$border_radius;
 
-          font-family: $second_font;
-          color: $white_color;
-          font-weight: $font_weight_regular;
-          font-size: $medium_font_size;
+          font-family: variables.$second_font;
+          color: variables.$white_color;
+          font-weight: variables.$font_weight_regular;
+          font-size: variables.$medium_font_size;
 
-          @media only screen and (max-width: $phone_width) {
-            font-size: $small_font_size;
+          @media only screen and (max-width: variables.$phone_width) {
+            font-size: variables.$small_font_size;
           }
 
           button {

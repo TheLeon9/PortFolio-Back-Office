@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import Head from 'next/head';
 
 import '@/styles/globals.scss';
-import '@/styles/variables.scss';
 
 import { ThemeProvider } from '@/context/ThemeContext.js';
 import logger from '@/utils/logger';

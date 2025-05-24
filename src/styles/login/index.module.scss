@@ -1,4 +1,4 @@
-@import '@/styles/variables.scss';
+@use '@/styles/variables';
 
 // ------------------------------+
 //
@@ -13,37 +13,37 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  margin-top: $big_margin;
+  margin-top: variables.$big_margin;
 
   .login {
     width: 600px;
     height: auto;
     display: flex;
 
-    @media only screen and (max-width: $phone_width) {
+    @media only screen and (max-width: variables.$phone_width) {
       width: 90%;
       height: 90%;
     }
 
     .container {
-      width: calc(100% - $double_image_height);
+      width: calc(100% - variables.$double_image_height);
       height: auto;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      padding-bottom: $margin;
+      padding-bottom: variables.$margin;
 
       .login_form {
         width: 80%;
-        margin-top: $big_margin;
+        margin-top: variables.$big_margin;
         display: flex;
         flex-direction: column;
 
         button,
         input {
           width: 100%;
-          margin-bottom: $margin;
+          margin-bottom: variables.$margin;
         }
       }
 
@@ -54,28 +54,28 @@
         text-align: center;
 
         p {
-          color: $white_color;
-          margin-bottom: $margin;
+          color: variables.$white_color;
+          margin-bottom: variables.$margin;
         }
 
         .google_button {
-          background: $white_color;
-          padding: $small_margin;
+          background: variables.$white_color;
+          padding: variables.$small_margin;
           border: none;
-          border-radius: $border_radius;
-          font-size: $medium_font_size;
-          font-family: $second_font;
-          font-weight: $font_weight_bold;
-          color: $text_color;
-          transition: $transition;
+          border-radius: variables.$border_radius;
+          font-size: variables.$medium_font_size;
+          font-family: variables.$second_font;
+          font-weight: variables.$font_weight_bold;
+          color: variables.$text_color;
+          transition: variables.$transition;
           display: flex;
           justify-content: center;
           align-items: center;
-          gap: $small_margin;
+          gap: variables.$small_margin;
           cursor: pointer;
 
-          @media only screen and (max-width: $phone_width) {
-            font-size: $small_font_size;
+          @media only screen and (max-width: variables.$phone_width) {
+            font-size: variables.$small_font_size;
           }
 
           &:hover {

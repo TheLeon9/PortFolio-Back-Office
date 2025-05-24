@@ -1,13 +1,23 @@
 import React from 'react';
 import styles from './index.module.scss';
-import { useTheme } from '@/context/ThemeContext.js';
 import Link from 'next/link';
+
+import { useTheme } from '@/context/ThemeContext.js';
+import { useRouter } from 'next/router';
 
 import Image from 'next/image';
 import Logo from 'p/img/logo/logo_fm_white.svg';
 
 export default function Layout({ children }) {
-  const { logged } = useTheme();
+
+  const router = useRouter();
+  const { logged, isLogged } = useTheme();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    isLogged(false);
+    router.push('/');
+  };
 
   return (
     <div className={styles.global_container}>
@@ -39,6 +49,9 @@ export default function Layout({ children }) {
             <Link href="/dashboard" className={styles.nav_link}>
               🏠 Dashboard
             </Link>
+            <button onClick={handleLogout} className="input_button">
+              🚪 Logout
+            </button>
           </nav>
         </div>
       )}

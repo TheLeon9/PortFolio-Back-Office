@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from '@/styles/login/index.module.scss';
 import { useTheme } from '@/context/ThemeContext.js';
 import { useRouter } from 'next/router';
@@ -11,80 +11,69 @@ import Title from '@/components/UI/Title';
 
 export default function Login() {
   const router = useRouter();
-  const { logged, isLogged } = useTheme();
+  const { isLogged } = useTheme();
 
-  const [mail, setMail] = useState('');
-  const [password, setPassword] = useState('');
+  const [mail, setMail] = useState('f@f.f');
+  const [password, setPassword] = useState('123');
   const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (logged) {
-      router.replace('/user');
-    }
-  }, [logged]);
+  const [loading, setLoading] = useState(false); // 🔄 Loader
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setLoading(true); // 🟡 Start loading
 
-    // Identifiants valides en dur
-    const validMail = 'f@f.f';
-    const validPassword = '123';
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: mail, password }),
+      });
 
-    if (mail === validMail && password === validPassword) {
-      isLogged(true); // Mise à jour du contexte (Connexion réussie)
+      const result = await response.json();
+
+      if (!response.ok) {
+        setError(result.message || 'Login failed');
+        return;
+      }
+
+      localStorage.setItem('token', result.token);
+      isLogged(true);
       router.push('/user');
-    } else {
-      setError('Invalid email or password.');
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('An unexpected error occurred.');
+    } finally {
+      setLoading(false); // ✅ Stop loading
     }
-
-    // try {
-    //   const response = await fetch('http://localhost:5000/api/auth/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ email, password }),
-    //   });
-
-    //   if (!response.ok) throw new Error('Invalid credentials');
-
-    //   const data = await response.json();
-    //   isLogged(true); // Mise à jour du contexte (Connexion réussie)
-    //   console.log('Logged in successfully:', data);
-    // } catch (err) {
-    //   setError('Invalid email or password.');
-    // }
   };
 
   return (
     <div className={styles.section_container}>
       <div className={styles.login}>
-        {/* Pillar */}
         <Pillar />
 
-        {/* Middle */}
         <div className={styles.container}>
-          {/* Title */}
           <Title title="LOGIN" />
-          {/* Formulaire de connexion */}
           <form className={styles.login_form} onSubmit={handleSubmit}>
             <input
               className="input_style"
-              type="mail"
+              type="email"
               name="mail"
               placeholder="Mail"
-              // pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
               title="Please enter a valid Mail address (e.g., example@mail.com)"
               onChange={(e) => setMail(e.target.value)}
+              value={mail}
               required
             />
             <input
               className="input_style"
               type="password"
-              name='password'
+              name="password"
               placeholder="PassWord"
-              // pattern="^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$"
               title="Password must be at least 8 characters long, include one uppercase letter, and one number."
               onChange={(e) => setPassword(e.target.value)}
+              value={password}
               required
             />
             {error && (
@@ -92,12 +81,16 @@ export default function Login() {
                 <p>{error}</p>
               </div>
             )}
-            <button type="submit" className="input_button">
-              START
+            <button
+              type="submit"
+              className="input_button"
+              disabled={loading}
+              style={{ opacity: loading ? 0.6 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+            >
+              {loading ? 'Connecting...' : 'START'}
             </button>
           </form>
 
-          {/* Connexion Google */}
           <div className={styles.google_login}>
             <p>OU</p>
             <button className={styles.google_button}>
@@ -112,7 +105,6 @@ export default function Login() {
           </div>
         </div>
 
-        {/* Pillar */}
         <Pillar />
       </div>
     </div>

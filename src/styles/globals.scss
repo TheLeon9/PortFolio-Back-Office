@@ -1,4 +1,5 @@
-@import '../styles/variables.scss';
+@use './variables';
+@use 'sass:color';
 
 // ------------------------------+
 //
@@ -14,8 +15,8 @@
 
 body {
   overflow-x: hidden;
-  letter-spacing: $letter_spacing;
-  line-height: $line_height;
+  letter-spacing: variables.$letter_spacing;
+  line-height: variables.$line_height;
 }
 
 // ------------------------------+
@@ -25,39 +26,39 @@ body {
 // ------------------------------+
 
 p {
-  font-family: $second_font;
-  color: $text_color;
-  font-weight: $font_weight_regular;
+  font-family: variables.$second_font;
+  color: variables.$text_color;
+  font-weight: variables.$font_weight_regular;
 
-  @media only screen and (max-width: $phone_width) {
-    font-size: $small_small_font_size;
+  @media only screen and (max-width: variables.$phone_width) {
+    font-size: variables.$small_small_font_size;
   }
 }
 
 .p {
   &_small_small {
-    font-size: $small_small_font_size;
+    font-size: variables.$small_small_font_size;
   }
   &_small {
-    font-size: $small_font_size;
-    @media only screen and (max-width: $phone_width) {
-      font-size: $small_small_font_size;
+    font-size: variables.$small_font_size;
+    @media only screen and (max-width: variables.$phone_width) {
+      font-size: variables.$small_small_font_size;
     }
   }
   &_medium {
-    font-size: $medium_font_size;
-    @media only screen and (max-width: $phone_width) {
-      font-size: $small_small_font_size;
+    font-size: variables.$medium_font_size;
+    @media only screen and (max-width: variables.$phone_width) {
+      font-size: variables.$small_small_font_size;
     }
   }
   &_big {
-    font-size: $big_font_size;
-    @media only screen and (max-width: $phone_width) {
-      font-size: $small_small_font_size;
+    font-size: variables.$big_font_size;
+    @media only screen and (max-width: variables.$phone_width) {
+      font-size: variables.$small_small_font_size;
     }
   }
   &_bold {
-    font-weight: $font_weight_bold;
+    font-weight: variables.$font_weight_bold;
   }
 }
 
@@ -68,13 +69,13 @@ p {
 // ------------------------------+
 
 h1 {
-  font-family: $first_font;
-  color: $white_color;
-  font-weight: $font_weight_bold;
-  font-size: $title_font_size;
+  font-family: variables.$first_font;
+  color: variables.$white_color;
+  font-weight: variables.$font_weight_bold;
+  font-size: variables.$title_font_size;
 
-  @media only screen and (max-width: $phone_width) {
-    font-size: $big_font_size;
+  @media only screen and (max-width: variables.$phone_width) {
+    font-size: variables.$big_font_size;
   }
 }
 
@@ -85,46 +86,46 @@ h1 {
 // ------------------------------+
 
 .input_button {
-  background: $white_color_rgba;
-  padding: $small_margin;
+  background: variables.$white_color_rgba;
+  padding: variables.$small_margin;
   border: none;
-  border-radius: $border_radius;
-  font-size: $medium_font_size;
-  font-family: $first_font;
-  font-weight: $font_weight_bold;
-  color: $white_color;
-  transition: $transition;
+  border-radius: variables.$border_radius;
+  font-size: variables.$medium_font_size;
+  font-family: variables.$first_font;
+  font-weight: variables.$font_weight_bold;
+  color: variables.$white_color;
+  transition: variables.$transition;
   cursor: pointer;
 
-  @media only screen and (max-width: $phone_width) {
-    font-size: $small_font_size;
+  @media only screen and (max-width: variables.$phone_width) {
+    font-size: variables.$small_font_size;
   }
 
   &:hover {
-    background: darken($white_color, 10%);
-    color: $main_color;
+    background: color.adjust(variables.$white_color, $lightness: -10%);
+    color: variables.$main_color;
   }
 }
 
 .delete_button {
   background: none;
-  padding: $small_margin;
-  border: $border_width solid $white_color_rgba;
-  border-radius: $border_radius;
-  font-size: $medium_font_size;
-  font-family: $first_font;
-  font-weight: $font_weight_bold;
-  color: $white_color;
-  transition: $transition;
+  padding: variables.$small_margin;
+  border: variables.$border_width solid variables.$white_color_rgba;
+  border-radius: variables.$border_radius;
+  font-size: variables.$medium_font_size;
+  font-family: variables.$first_font;
+  font-weight: variables.$font_weight_bold;
+  color: variables.$white_color;
+  transition: variables.$transition;
   cursor: pointer;
 
-  @media only screen and (max-width: $phone_width) {
-    font-size: $small_font_size;
+  @media only screen and (max-width: variables.$phone_width) {
+    font-size: variables.$small_font_size;
   }
 
   &:hover {
-    background: $white_color_rgba;
-    color: $white_color;
+    background: variables.$white_color_rgba;
+    color: variables.$white_color;
   }
 }
 
@@ -135,25 +136,25 @@ h1 {
 // ------------------------------+
 
 .input_style {
-  background: $main_color_rgba;
-  padding: $small_margin;
-  border: $border_width solid $white_color_rgba;
-  border-radius: $border_radius;
-  color: $white_color;
-  font-size: $font_size;
-  transition: $transition;
+  background: variables.$main_color_rgba;
+  padding: variables.$small_margin;
+  border: variables.$border_width solid variables.$white_color_rgba;
+  border-radius: variables.$border_radius;
+  color: variables.$white_color;
+  font-size: variables.$font_size;
+  transition: variables.$transition;
   outline: none;
 
-  @media only screen and (max-width: $phone_width) {
-    font-size: $small_font_size;
+  @media only screen and (max-width: variables.$phone_width) {
+    font-size: variables.$small_font_size;
   }
 
   &:focus {
-    border: $border_width solid $main_color;
+    border: variables.$border_width solid variables.$main_color;
   }
 
   &::placeholder {
-    color: $white_color_rgba;
+    color: variables.$white_color_rgba;
   }
 }
 
@@ -165,16 +166,16 @@ h1 {
 
 .success_banner {
   width: 100%;
-  margin-bottom: $margin;
-  background: $white_color_rgba;
-  padding: $small_margin;
+  margin-bottom: variables.$margin;
+  background: variables.$white_color_rgba;
+  padding: variables.$small_margin;
   border: none;
-  border-radius: $border_radius;
+  border-radius: variables.$border_radius;
   text-align: center;
 
   p {
-    color: $succes_color;
-    font-weight: $font_weight_bold;
+    color: variables.$succes_color;
+    font-weight: variables.$font_weight_bold;
   }
 }
 
@@ -186,16 +187,16 @@ h1 {
 
 .error_banner {
   width: 100%;
-  margin-bottom: $margin;
-  background: $white_color_rgba;
-  padding: $small_margin;
+  margin-bottom: variables.$margin;
+  background: variables.$white_color_rgba;
+  padding: variables.$small_margin;
   border: none;
-  border-radius: $border_radius;
+  border-radius: variables.$border_radius;
   text-align: center;
 
   p {
-    color: $error_color;
-    font-weight: $font_weight_bold;
+    color: variables.$error_color;
+    font-weight: variables.$font_weight_bold;
   }
 }
 
@@ -206,8 +207,8 @@ h1 {
 // ------------------------------+
 
 .separator {
-  height: $border_width;
-  background-color: $white_color_rgba;
+  height: variables.$border_width;
+  background-color: variables.$white_color_rgba;
 }
 
 // ------------------------------+
@@ -217,13 +218,13 @@ h1 {
 // ------------------------------+
 
 *::selection {
-  background-color: $black_color;
-  color: $main_color;
+  background-color: variables.$black_color;
+  color: variables.$main_color;
 }
 
 *::-moz-selection {
-  background-color: $black_color;
-  color: $main_color;
+  background-color: variables.$black_color;
+  color: variables.$main_color;
 }
 
 // ------------------------------+
@@ -238,14 +239,14 @@ h1 {
 }
 
 *::-webkit-scrollbar-track {
-  background-color: $black_color;
+  background-color: variables.$black_color;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color:  $white_color;
+  background-color: variables.$white_color;
   border: none;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background-color:  $main_color;
+  background-color: variables.$main_color;
 }

@@ -1,4 +1,4 @@
-@import '@/styles/variables.scss';
+@use '@/styles/variables';
 
 // ------------------------------+
 //
@@ -7,7 +7,7 @@
 // ------------------------------+
 
 .pillar {
-  width: $image_height;
+  width: variables.$image_height;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -16,20 +16,20 @@
 
   .section_image {
     width: 100%;
-    height: $image_height;
+    height: variables.$image_height;
     display: flex;
     justify-content: center;
 
     .deco_image {
-      width: $image_height;
-      height: $image_height;
+      width: variables.$image_height;
+      height: variables.$image_height;
     }
   }
 
   .deco_line {
-    width: $border_width_big;
-    height: calc(100% - $image_height);
-    background-color: $white_color;
+    width: variables.$border_width_big;
+    height: calc(100% - variables.$image_height);
+    background-color: variables.$white_color;
     position: relative;
 
     &::after {
@@ -37,9 +37,9 @@
       position: absolute;
       bottom: 0;
       left: 50%;
-      width: $margin;
-      height: $margin;
-      background-color: $white_color;
+      width: variables.$margin;
+      height: variables.$margin;
+      background-color: variables.$white_color;
       transform: translate(-50%, 0px) rotate(45deg);
     }
   }
