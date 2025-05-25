@@ -16,12 +16,12 @@ export default function Login() {
   const [mail, setMail] = useState('f@f.f');
   const [password, setPassword] = useState('123');
   const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false); // 🔄 Loader
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    setLoading(true); // 🟡 Start loading
+    setLoading(true);
 
     try {
       const response = await fetch('/api/auth/login', {
@@ -33,7 +33,7 @@ export default function Login() {
       const result = await response.json();
 
       if (!response.ok) {
-        setError(result.message || 'Login failed');
+        setError(result.message || '❌ Login failed');
         return;
       }
 
@@ -41,10 +41,9 @@ export default function Login() {
       isLogged(true);
       router.push('/user');
     } catch (err) {
-      console.error('Login error:', err);
-      setError('An unexpected error occurred.');
+      setError('❌ An unexpected error occurred.');
     } finally {
-      setLoading(false); // ✅ Stop loading
+      setLoading(false);
     }
   };
 
@@ -85,7 +84,10 @@ export default function Login() {
               type="submit"
               className="input_button"
               disabled={loading}
-              style={{ opacity: loading ? 0.6 : 1, cursor: loading ? 'not-allowed' : 'pointer' }}
+              style={{
+                opacity: loading ? 0.6 : 1,
+                cursor: loading ? 'not-allowed' : 'pointer',
+              }}
             >
               {loading ? 'Connecting...' : 'START'}
             </button>

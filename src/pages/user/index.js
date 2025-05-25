@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 
 import { useTheme } from '@/context/ThemeContext.js';
 import { useRouter } from 'next/router';
+
 import Title from '@/components/UI/Title';
 import Pillar from '@/components/UI/Pillar';
 
@@ -11,43 +12,85 @@ export default function User() {
   const router = useRouter();
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    lastname: 'Moracchini',
-    firstname: 'Florian',
-    age: '22',
-    mail: 'florian.moracchini09@gmail.com',
-    description: 'Développeur / Designer',
-    linkedin: 'https://www.linkedin.com/in/florian-moracchini/',
-    github: 'https://github.com/TheLeon9',
-    city: 'Paris',
-    country: 'France',
+    lastName: '',
+    firstName: '',
+    year: 0,
+    country: '',
+    city: '',
+    email: '',
+    description: '',
+    linkedin: '',
+    github: '',
   });
 
   useEffect(() => {
     if (!logged) {
-      router.replace('/');
+      router.push('/');
+      return;
     }
+
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const res = await fetch('/api/user', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await res.json();
+        if (res.ok && data.data && data.data.length > 0) {
+          setFormData(data.data[0]);
+        } else {
+          setError(data.message || '❌ Failed to fetch user');
+        }
+      } catch (err) {
+        setError('❌ Failed to fetch user');
+      }
+    };
+
+    fetchUser();
   }, [logged]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
+      [name]: name === 'year' ? parseInt(value, 10) || '' : value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
+    setLoading(true);
 
-    // Ici, tu peux envoyer les données à ton API
-    if (formData.firstname != '') {
-      setSuccess('Updating the profile was a Succes');
-    } else {
-      setError('Error updating your profil');
+    try {
+      const token = localStorage.getItem('token');
+      const res = await fetch(`/api/user?id=${formData.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess('✅ Profile updated successfully');
+      } else {
+        setError(data.message || '❌ Update failed');
+      }
+    } catch (err) {
+      setError('❌ Error updating profile');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,36 +110,38 @@ export default function User() {
               <input
                 className="input_style"
                 type="text"
-                name="lastname"
+                name="lastName"
                 placeholder="LastName"
-                value={formData.lastname}
+                value={formData.lastName}
                 onChange={handleChange}
               />
               <input
                 className="input_style"
                 type="text"
-                name="firstname"
+                name="firstName"
                 placeholder="FirstName"
-                value={formData.firstname}
+                value={formData.firstName}
                 onChange={handleChange}
               />
             </div>
             <input
               className="input_style"
               type="email"
-              name="mail"
+              name="email"
               placeholder="Mail"
-              value={formData.mail}
+              value={formData.email}
               onChange={handleChange}
             />
             <div className={styles.multiple_input_cont}>
               <input
                 className="input_style"
                 type="number"
-                name="age"
-                placeholder="Age"
-                value={formData.age}
+                name="year"
+                placeholder="Year"
+                value={formData.year}
                 onChange={handleChange}
+                min="1"
+                max="120"
               />
               <input
                 className="input_style"
@@ -148,8 +193,16 @@ export default function User() {
                 <p>{success}</p>
               </div>
             )}
-            <button type="submit" className="input_button">
-              UPDATE
+            <button
+              type="submit"
+              className="input_button"
+              disabled={loading}
+              style={{
+                opacity: loading ? 0.6 : 1,
+                cursor: loading ? 'not-allowed' : 'pointer',
+              }}
+            >
+              {loading ? 'Loading...' : 'UPDATE'}
             </button>
           </form>
         </div>

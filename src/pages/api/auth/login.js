@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method Not Allowed' });
+    return res.status(405).json({ message: '❌ Method Not Allowed' });
   }
 
   const { email, password } = req.body;
@@ -24,23 +24,21 @@ export default async function handler(req, res) {
     } catch {
       return res
         .status(502)
-        .json({ message: 'Invalid response from Auth Service' });
+        .json({ message: '❌ Invalid response from Auth Service' });
     }
 
     if (!authResponse.ok) {
       return res
         .status(authResponse.status)
-        .json({ message: data.message || 'Login failed' });
+        .json({ message: data.message || '❌ Login failed' });
     }
 
     return res.status(200).json({ token: data.token, message: data.message });
   } catch (error) {
-    console.error('Auth connection error:', error.code || error.message);
-
     if (error.code === 'ECONNREFUSED') {
-      return res.status(503).json({ message: 'Auth Service Unavailable' });
+      return res.status(503).json({ message: '❌ Auth Service Unavailable' });
     }
 
-    return res.status(500).json({ message: 'Internal Server Error' });
+    return res.status(500).json({ message: '❌ Internal Server Error' });
   }
 }
