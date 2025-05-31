@@ -7,9 +7,10 @@ import { useRouter } from 'next/router';
 
 import Image from 'next/image';
 import Logo from 'p/img/logo/logo_fm_white.svg';
+import Katana from 'p/img/deco/katana.svg';
+import Deco_Image from 'p/img/deco/title_image.svg';
 
 export default function Layout({ children }) {
-
   const router = useRouter();
   const { logged, isLogged } = useTheme();
 
@@ -20,47 +21,90 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className={styles.global_container}>
-      {/* Header */}
-      <div className={styles.section_top}>
-        <Image
-          src={Logo}
-          width={80}
-          height={80}
-          alt="Logo FM"
-          className={styles.logo}
-        />
-      </div>
-
-      {/* Nav Bar */}
-      {logged && (
-        <div className={styles.section_nav}>
-          {/* Navigation Bar */}
-          <nav className={styles.navbar}>
-            <Link href="/user" className={styles.nav_link}>
-              👤 User
-            </Link>
-            <Link href="/projects" className={styles.nav_link}>
-              📁 Projects
-            </Link>
-            <Link href="/skills" className={styles.nav_link}>
-              🛠️ Skills
-            </Link>
-            <Link href="/services" className={styles.nav_link}>
-              💠 Services
-            </Link>
-            <Link href="/dashboard" className={styles.nav_link}>
-              🏠 Dashboard
-            </Link>
-            <button onClick={handleLogout} className="input_button">
-              🚪 Logout
-            </button>
-          </nav>
+    <div className={styles.layout_wrapper}>
+      <div className={styles.background_global_container}></div>
+      <div id="top" className={styles.global_container}>
+        {/* Header */}
+        <div className={styles.section_top}>
+          <Image
+            src={Logo}
+            width={80}
+            height={80}
+            alt="Logo FM"
+            className={styles.logo}
+          />
         </div>
-      )}
 
-      {/* Main / Children */}
-      {React.cloneElement(children)}
+        {/* Nav Bar */}
+        {logged && (
+          <nav className={styles.section_nav}>
+            {/* Navigation Bar */}
+            <ul className={styles.nav_list}>
+              <li>
+                <Link href="/user" className={styles.nav_item}>
+                  User
+                </Link>
+              </li>
+              <li>
+                <Link href="/projects" className={styles.nav_item}>
+                  Projects
+                </Link>
+              </li>
+              <li>
+                <Link href="/skills" className={styles.nav_item}>
+                  Skills
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className={styles.nav_item}>
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/dashboard" className={styles.nav_item}>
+                  Dashboard
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        )}
+
+        {/* Top Helper */}
+        {logged && (
+          <a href="#top" className={styles.scroll_to_top}>
+            <Image
+              src={Katana}
+              width={0}
+              height={0}
+              alt="Left Katana"
+              className={styles.to_top_image_left}
+            />
+            <Image
+              src={Katana}
+              width={0}
+              height={0}
+              alt="Right Katana"
+              className={styles.to_top_image_right}
+            />
+          </a>
+        )}
+
+        {/* Log Out */}
+        {logged && (
+          <button onClick={handleLogout} className={styles.logout_button}>
+            <Image
+              src={Deco_Image}
+              width={40}
+              height={40}
+              alt="Decoration Image"
+              className={styles.deco_image}
+            />
+          </button>
+        )}
+
+        {/* Main / Children */}
+        {React.cloneElement(children)}
+      </div>
     </div>
   );
 }

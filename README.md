@@ -1,40 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🔐 Back Office Front Microservice
 
-## Getting Started
+This microservice provides a **front-end interface** for internal back office operations, interacting with a local database via multiple exposed routes.
+---
 
-First, run the development server:
+## 🚀 How It Works
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+The service communicates with the **API** through various **routes** to impact (create, read, update, delete) the local database.
+---
+
+## 📦 Installation & Launch
+
+### Clone the project
+
+    >   git clone <repo-url>
+
+### Navigate to the project folder
+
+    >   cd project-folder-name
+
+### Install dependencies
+
+    >   npm install
+
+### Add environment variables
+
+Create a `.env` file at the root of the project with the following content :
+
+```
+AUTH_API="http://localhost:4000"
+BDD_API="http://localhost:3500"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run tests
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+    >   npm test
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+### Start the server
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+    >   npm start
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🎴 Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- ⚛️[**Next.js**](https://nextjs.org/): A React-based framework for building server-rendered and statically generated web applications.
+- ⚛️[**React**](https://react.dev/): A declarative JavaScript library for building user interfaces.
+- ⚛️[**SASS (JWT)**](https://sass-lang.com/): A CSS preprocessor to write more maintainable and cleaner stylesheets.
+- ⚛️[**Pino**](https://www.npmjs.com/package/pino): A fast and lightweight logger for Node.js.
+- ⚛️[**Pino-pretty**](https://www.npmjs.com/package/pino-pretty): Pretty prints logs from Pino for better readability during development.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🔒 Security
 
-## Deploy on Vercel
+_Even though the service is simple, it relies on a **JWT** obtained through the **login process**. This `token` is **required** for **all** communications with the local API._
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+_While the `token` is signed server-side with a secret key **(JWT_SECRET)**, make sure to never expose or commit sensitive files like your `.env` to a public repository._
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+---
+
+## 📬 Notes
+
+This microservice is designed to be used only in a **local Back Office context**.
+
+It simply interacts with a local API 😄
+
+---
+
+## 🏯 License
+
+This project is licensed under the [MIT License](LICENSE.md) - share, modify, live in peace! ☠️
+
+---
+
+## 🗺️ Contact
+
+For any inquiries, suggestions, or collaboration opportunities, don't hesitate to contact me. 📜
+
+---
+
+## 🧑🏻‍💻 Author
+
+Created by TheLeon 🦁.
+
+> "Creativity is intelligence having fun." - Albert Einstein ☄️
+
+Thanks for visiting my github! 🩵
+
+And as we say in France : Merci ! 💙🤍❤️
