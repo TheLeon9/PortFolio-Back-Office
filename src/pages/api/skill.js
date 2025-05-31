@@ -1,7 +1,7 @@
 export default async function handler(req, res) {
   const { method, query } = req;
 
-  if (!['GET', 'PUT'].includes(method)) {
+  if (!['GET', 'POST', 'DELETE'].includes(method)) {
     return res.status(405).json({ message: '❌ Method Not Allowed' });
   }
 
@@ -16,27 +16,17 @@ export default async function handler(req, res) {
 
   try {
     if (method === 'GET') {
-      const response = await fetch(`${bddApiUrl}/user`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+      const response = await fetch(`${bddApiUrl}/skills`, {
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       const data = await response.json();
       return res.status(response.status).json(data);
     }
 
-    if (method === 'PUT') {
-      const { id } = query;
-
-      if (!id) {
-        return res.status(400).json({
-          message: '❌ User ID is required',
-        });
-      }
-
-      const response = await fetch(`${bddApiUrl}/user/${id}`, {
-        method: 'PUT',
+    if (method === 'POST') {
+      const response = await fetch(`${bddApiUrl}/skills`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -47,9 +37,29 @@ export default async function handler(req, res) {
       const data = await response.json();
       return res.status(response.status).json(data);
     }
+
+    if (method === 'DELETE') {
+      const { id } = query;
+
+      if (!id) {
+        return res
+          .status(400)
+          .json({ message: '❌ Skill ID is required for deletion' });
+      }
+
+      const response = await fetch(`${bddApiUrl}/skills/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+      return res.status(response.status).json(data);
+    }
   } catch (error) {
     return res
       .status(500)
-      .json({ message: '❌ Server error during User operation' });
+      .json({ message: '❌ Server error during Skill operation' });
   }
 }

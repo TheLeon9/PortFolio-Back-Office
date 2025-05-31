@@ -46,6 +46,9 @@ export default function Layout({ children }) {
             <Link href="/skills" className={styles.nav_link}>
               🛠️ Skills
             </Link>
+            <Link href="/services" className={styles.nav_link}>
+              💠 Services
+            </Link>
             <Link href="/dashboard" className={styles.nav_link}>
               🏠 Dashboard
             </Link>

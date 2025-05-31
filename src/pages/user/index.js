@@ -10,6 +10,7 @@ import Pillar from '@/components/UI/Pillar';
 export default function User() {
   const { logged } = useTheme();
   const router = useRouter();
+
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
@@ -46,10 +47,10 @@ export default function User() {
         if (res.ok && data.data && data.data.length > 0) {
           setFormData(data.data[0]);
         } else {
-          setError(data.message || '❌ Failed to fetch user');
+          setError(data.message || '❌ Failed to fetch User');
         }
       } catch (err) {
-        setError('❌ Failed to fetch user');
+        setError('❌ Failed to fetch User');
       }
     };
 
@@ -88,7 +89,7 @@ export default function User() {
         setError(data.message || '❌ Update failed');
       }
     } catch (err) {
-      setError('❌ Error updating profile');
+      setError('❌ Error updating Profile');
     } finally {
       setLoading(false);
     }

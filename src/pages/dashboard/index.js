@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 
 import { useTheme } from '@/context/ThemeContext.js';
 import { useRouter } from 'next/router';
+
 import Title from '@/components/UI/Title';
 import Pillar from '@/components/UI/Pillar';
 

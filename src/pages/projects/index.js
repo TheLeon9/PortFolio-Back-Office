@@ -3,6 +3,7 @@ import styles from './index.module.scss';
 
 import { useTheme } from '@/context/ThemeContext.js';
 import { useRouter } from 'next/router';
+
 import Title from '@/components/UI/Title';
 import Pillar from '@/components/UI/Pillar';
 
@@ -10,55 +11,130 @@ export default function Projects() {
   const { logged } = useTheme();
   const router = useRouter();
 
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-
-  const [projects, setProjects] = useState([]);
-  const [form, setForm] = useState({
-    number: '',
+  const [project, setProject] = useState({
+    projectNumber: '',
     title: '',
     description: '',
     url: '',
     highlights: ['', '', '', '', ''],
   });
+  const [projectsList, setProjectsList] = useState([]);
+
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     if (!logged) {
       router.replace('/');
+      return;
     }
+
+    const fetchProjects = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('/api/project', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          setProjectsList(data.data);
+        } else {
+          setError(data.message || '❌ Failed to load Projects');
+        }
+      } catch (err) {
+        setError('❌ Error loading Projects');
+      }
+    };
+
+    fetchProjects();
   }, [logged]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setProject({ ...project, [name]: value });
   };
 
   const handleHighlightChange = (index, value) => {
-    const newHighlights = [...form.highlights];
+    const newHighlights = [...project.highlights];
     newHighlights[index] = value;
-    setForm({ ...form, highlights: newHighlights });
+    setProject({ ...project, highlights: newHighlights });
   };
 
-  const handleAddProject = (e) => {
+  const handleAddProject = async (e) => {
     e.preventDefault();
-    if (!form.title) {
-      setError('Title and URL are required.');
-      return;
-    }
-    setProjects([...projects, form]);
-    setForm({
-      number: '',
-      title: '',
-      description: '',
-      url: '',
-      highlights: ['', '', '', '', ''],
-    });
-    setSuccess('Project added successfully!');
     setError('');
+    setSuccess('');
+
+    const payload = {
+      projectNumber: parseInt(project.projectNumber),
+      title: project.title,
+      description: project.description,
+      url: project.url,
+      highlight1: project.highlights[0],
+      highlight2: project.highlights[1],
+      highlight3: project.highlights[2],
+      highlight4: project.highlights[3],
+      highlight5: project.highlights[4],
+    };
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch('/api/project', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setProjectsList([...projectsList, data.data]);
+        setProject({
+          projectNumber: '',
+          title: '',
+          description: '',
+          url: '',
+          highlights: ['', '', '', '', ''],
+        });
+        setSuccess('✅ Project added');
+      } else {
+        setError(data.message || '❌ Failed to add Project');
+      }
+    } catch (err) {
+      setError('❌ Server error when adding Project');
+    }
   };
 
-  const handleDeleteProject = (index) => {
-    setProjects(projects.filter((_, i) => i !== index));
+  const handleRemoveProject = async (index) => {
+    const projectToDelete = projectsList[index];
+
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(`/api/project?id=${projectToDelete.id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        const updatedList = projectsList.filter((_, i) => i !== index);
+        setProjectsList(updatedList);
+        setSuccess('✅ Project deleted');
+      } else {
+        setError(data.message || '❌ Failed to delete Project');
+      }
+    } catch (err) {
+      setError('❌ Server error when deleting Project');
+    }
   };
 
   return (
@@ -76,9 +152,9 @@ export default function Projects() {
             <input
               className="input_style"
               type="number"
-              name="number"
+              name="projectNumber"
               placeholder="Project Number"
-              value={form.number}
+              value={project.projectNumber}
               onChange={handleChange}
             />
             <input
@@ -86,7 +162,7 @@ export default function Projects() {
               type="text"
               name="title"
               placeholder="Project Title"
-              value={form.title}
+              value={project.title}
               onChange={handleChange}
               required
             />
@@ -94,7 +170,7 @@ export default function Projects() {
               className="input_style"
               name="description"
               placeholder="Project Description"
-              value={form.description}
+              value={project.description}
               onChange={handleChange}
             />
             <input
@@ -102,11 +178,11 @@ export default function Projects() {
               type="url"
               name="url"
               placeholder="Project URL"
-              value={form.url}
+              value={project.url}
               onChange={handleChange}
             />
 
-            {form.highlights.map((highlight, index) => (
+            {project.highlights.map((highlight, index) => (
               <input
                 className="input_style"
                 key={index}
@@ -134,13 +210,13 @@ export default function Projects() {
 
           {/* Projets List */}
           <ul className={styles.project_list}>
-            {projects.map((project, index) => (
-              <li key={index} className={styles.project_item}>
+            {projectsList.map((project, index) => (
+              <li key={project.id} className={styles.project_item}>
                 <span>
-                  {project.number} - {project.title}
+                  {project.projectNumber} - {project.title}
                 </span>
                 <button
-                  onClick={() => handleDeleteProject(index)}
+                  onClick={() => handleRemoveProject(index)}
                   className="delete_button"
                 >
                   DELETE
