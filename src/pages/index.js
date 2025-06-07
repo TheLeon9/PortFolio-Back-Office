@@ -39,7 +39,7 @@ export default function Login() {
 
       localStorage.setItem('token', result.token);
       isLogged(true);
-      router.push('/user');
+      router.replace('/user');
     } catch (err) {
       setError('❌ An unexpected error occurred.');
     } finally {

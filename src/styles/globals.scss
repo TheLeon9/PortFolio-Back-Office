@@ -40,6 +40,10 @@ p {
 }
 
 .p {
+  &_white {
+    color: variables.$white_color;
+  }
+
   &_small_small {
     font-size: variables.$small_small_font_size;
   }

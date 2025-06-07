@@ -29,22 +29,22 @@ export default function User() {
 
   useEffect(() => {
     if (!logged) {
-      router.push('/');
+      router.replace('/');
       return;
     }
 
     const fetchUser = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('/api/user', {
+        const response = await fetch('/api/user', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        const data = await res.json();
-        if (res.ok && data.data && data.data.length > 0) {
+        const data = await response.json();
+        if (response.ok && data.data && data.data.length > 0) {
           setFormData(data.data[0]);
         } else {
           setError(data.message || '❌ Failed to fetch User');
@@ -73,7 +73,7 @@ export default function User() {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`/api/user?id=${formData.id}`, {
+      const response = await fetch(`/api/user?id=${formData.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -82,8 +82,8 @@ export default function User() {
         body: JSON.stringify(formData),
       });
 
-      const data = await res.json();
-      if (res.ok) {
+      const data = await response.json();
+      if (response.ok) {
         setSuccess('✅ Profile updated successfully');
       } else {
         setError(data.message || '❌ Update failed');

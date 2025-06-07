@@ -8,14 +8,15 @@
 
 .section_container {
   width: 100%;
-  height: calc(100vh - 200px);
+  height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  margin-top: variables.$big_margin;
 
   .dashboard {
-    width: 600px;
+    width: 800px;
     height: auto;
     display: flex;
 
@@ -32,6 +33,50 @@
       justify-content: flex-start;
       align-items: center;
       padding-bottom: variables.$margin;
+
+      .constants_form {
+        width: 90%;
+        margin-top: variables.$big_margin;
+        display: flex;
+        flex-direction: column;
+
+        .list_text {
+          font-family: variables.$second_font;
+          color: variables.$white_color;
+          font-weight: variables.$font_weight_regular;
+          padding: variables.$small_margin;
+          list-style: none;
+          list-style-position: inside;
+
+          @media only screen and (max-width: variables.$phone_width) {
+            font-size: variables.$small_font_size;
+          }
+
+          .span_text {
+            color: variables.$succes_color;
+          }
+
+          .li_text {
+            position: relative;
+            margin-top: variables.$small_margin;
+            padding-left: variables.$big_margin;
+            &::before {
+              content: '獅';
+              position: absolute;
+              left: 0;
+              color: variables.$succes_color;
+              font-weight: variables.$font_weight_regular;
+              font-size: variables.$medium_font_size;
+            }
+          }
+        }
+
+        button,
+        input {
+          width: 100%;
+          margin-bottom: variables.$margin;
+        }
+      }
     }
   }
 }

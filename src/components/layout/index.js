@@ -17,7 +17,7 @@ export default function Layout({ children }) {
   const handleLogout = () => {
     localStorage.removeItem('token');
     isLogged(false);
-    router.push('/');
+    router.replace('/');
   };
 
   return (
