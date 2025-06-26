@@ -1,12 +1,10 @@
 # 🔐 Back Office Front Microservice
 
-This microservice provides a **front-end interface** for internal back office operations, interacting with a local database via multiple exposed routes.
----
+## This microservice provides a **front-end interface** for internal back office operations, interacting with a local database via multiple exposed routes.
 
 ## 🚀 How It Works
 
-The service communicates with the **API** through various **routes** to impact (create, read, update, delete) the local database.
----
+## The service communicates with the **API** through various **routes** to impact (create, read, update, delete) the local database.
 
 ## 📦 Installation & Launch
 
@@ -28,6 +26,7 @@ Create a `.env` file at the root of the project with the following content :
 
 ```
 AUTH_API="http://localhost:4000"
+METRICS_API="http://localhost:4002"
 BDD_API="http://localhost:3500"
 ```
 

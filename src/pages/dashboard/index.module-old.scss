@@ -2,7 +2,7 @@
 
 // ------------------------------+
 //
-//          Skills
+//          DashBoard
 //
 // ------------------------------+
 
@@ -15,7 +15,7 @@
   align-items: center;
   margin-top: variables.$big_margin;
 
-  .skills {
+  .dashboard {
     width: 800px;
     height: auto;
     display: flex;
@@ -34,50 +34,47 @@
       align-items: center;
       padding-bottom: variables.$margin;
 
-      .skills_form {
+      .constants_form {
         width: 90%;
         margin-top: variables.$big_margin;
         display: flex;
         flex-direction: column;
 
-        button,
-        input {
-          width: 100%;
-          margin-bottom: variables.$margin;
-        }
-      }
-
-      .skills_list {
-        width: 90%;
-        margin-top: variables.$big_margin;
-        display: flex;
-        flex-direction: column;
-
-        li {
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          list-style: none;
-          
-          margin-bottom: variables.$small_margin;
-          background: variables.$main_color_rgba;
-          padding: variables.$small_margin;
-          border: variables.$border_width solid variables.$white_color_rgba;
-          border-radius: variables.$border_radius;
-
+        .list_text {
           font-family: variables.$second_font;
           color: variables.$white_color;
           font-weight: variables.$font_weight_regular;
-          font-size: variables.$medium_font_size;
+          padding: variables.$small_margin;
+          list-style: none;
+          list-style-position: inside;
 
           @media only screen and (max-width: variables.$phone_width) {
             font-size: variables.$small_font_size;
           }
 
-          button {
-            width: auto;
+          .span_text {
+            color: variables.$succes_color;
           }
+
+          .li_text {
+            position: relative;
+            margin-top: variables.$small_margin;
+            padding-left: variables.$big_margin;
+            &::before {
+              content: '獅';
+              position: absolute;
+              left: 0;
+              color: variables.$succes_color;
+              font-weight: variables.$font_weight_regular;
+              font-size: variables.$medium_font_size;
+            }
+          }
+        }
+
+        button,
+        input {
+          width: 100%;
+          margin-bottom: variables.$margin;
         }
       }
     }

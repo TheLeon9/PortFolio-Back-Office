@@ -34,47 +34,56 @@
       align-items: center;
       padding-bottom: variables.$margin;
 
-      .constants_form {
+      .metrics_section {
         width: 90%;
         margin-top: variables.$big_margin;
         display: flex;
         flex-direction: column;
 
-        .list_text {
-          font-family: variables.$second_font;
-          color: variables.$white_color;
-          font-weight: variables.$font_weight_regular;
-          padding: variables.$small_margin;
+        .metrics_list {
+          width: 100%;
           list-style: none;
-          list-style-position: inside;
+          padding: 0;
+          margin: 0;
 
-          @media only screen and (max-width: variables.$phone_width) {
-            font-size: variables.$small_font_size;
-          }
+          li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-          .span_text {
-            color: variables.$succes_color;
-          }
+            margin-bottom: variables.$small_margin;
+            background: variables.$main_color_rgba;
+            padding: variables.$small_margin;
+            border: variables.$border_width solid variables.$white_color_rgba;
+            border-radius: variables.$border_radius;
 
-          .li_text {
-            position: relative;
-            margin-top: variables.$small_margin;
-            padding-left: variables.$big_margin;
-            &::before {
-              content: '獅';
-              position: absolute;
-              left: 0;
-              color: variables.$succes_color;
+            font-family: variables.$second_font;
+            color: variables.$white_color;
+            font-weight: variables.$font_weight_regular;
+            font-size: variables.$medium_font_size;
+
+            .metric_label {
+              width: 40%;
               font-weight: variables.$font_weight_regular;
-              font-size: variables.$medium_font_size;
+              color: variables.$succes_color;
+              text-transform: capitalize;
+            }
+
+            .metric_separator {
+              width: 20%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+
+            .metric_value {
+              width: 40%;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              font-weight: variables.$font_weight_bold;
             }
           }
-        }
-
-        button,
-        input {
-          width: 100%;
-          margin-bottom: variables.$margin;
         }
       }
     }
