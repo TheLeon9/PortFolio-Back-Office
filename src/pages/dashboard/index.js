@@ -13,7 +13,7 @@ export default function Dashboard() {
 
   const [error, setError] = useState('');
 
-  const [metricsList, setMetricsList] = useState({});
+  const [metricsList, setMetricsList] = useState([]);
 
   useEffect(() => {
     if (!logged) {
@@ -66,7 +66,15 @@ export default function Dashboard() {
                 <li key={label}>
                   <span className={styles.metric_label}>{label}</span>
                   <span className={styles.metric_separator}>||</span>
-                  <span className={styles.metric_value}>{value}</span>
+                  <span className={styles.metric_value}>
+                    {Array.isArray(value)
+                      ? value.join(', ')
+                      : typeof value === 'object' && value !== null
+                      ? Object.entries(value)
+                          .map(([k, v]) => `${k}: ${v}`)
+                          .join(' | ')
+                      : value}
+                  </span>
                 </li>
               ))}
             </ul>
