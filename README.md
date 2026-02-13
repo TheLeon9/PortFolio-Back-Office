@@ -68,7 +68,8 @@ It simply interacts with a local API 😄
 
 ## 🏯 License
 
-This project is licensed under the [MIT License](LICENSE.md) - share, modify, live in peace! ☠️
+This project is not licensed for public use.
+All rights reserved. ☠️
 
 ---
 
